@@ -19,7 +19,7 @@ module.exports = (config) => {
         if (!jsDocTitle) {
           return `#${toId(typeName)}`;
         }
-        const componentName = (fullPath || '').match(/components\/([^/]*)/)?.[1];
+        const componentName = (fullPath || '').match(/components\/([^/]*)/)[1];
         if (componentName) {
           return `${toHyphen(componentName)}#${toId(jsDocTitle)}`;
         }
