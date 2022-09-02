@@ -54,4 +54,6 @@ export interface MessageProps {
    */
   closable?: boolean;
   type?: string;
+  prefixCls?: string;
+  rtl?: boolean;
 }

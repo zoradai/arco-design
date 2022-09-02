@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import BaseNotification from '../_class/notification';
 import Notice from '../_class/notice';
 import cs from '../_util/classNames';
 import { MessageProps } from './interface';
+import { isUndefined } from '../_util/is';
 
 const messageTypes = ['info', 'success', 'error', 'warning', 'loading', 'normal'];
 let messageInstance: object = {};
@@ -27,7 +28,13 @@ export interface MessageType {
   (): void;
 }
 
-function addInstance(noticeProps: MessageProps) {
+function instanceRender(element: ReactElement) {
+  const div = document.createElement('div');
+  (container || document.body).appendChild(div);
+  ReactDOM.render(element, div);
+}
+
+export function addInstance(noticeProps: MessageProps, callback: (element: ReactElement) => void) {
   const _noticeProps = {
     position: 'top',
     duration,
@@ -49,18 +56,14 @@ function addInstance(noticeProps: MessageProps) {
       id = messageInstance[position].add(_noticeProps);
     }
   } else {
-    const div = document.createElement('div');
-    (container || document.body).appendChild(div);
-
-    ReactDOM.render(
+    callback(
       <Message
         transitionClassNames={transitionClassNames}
         ref={(instance) => {
           messageInstance[position] = instance;
           id = messageInstance[position].add(_noticeProps);
         }}
-      />,
-      div
+      />
     );
   }
 
@@ -130,12 +133,10 @@ class Message extends BaseNotification {
   };
 
   render() {
-    const { transitionClassNames } = this.props;
+    const { transitionClassNames, prefixCls: _prefixCls, rtl: _rtl } = this.props;
     const { notices, position } = this.state;
-    const prefixClsMessage = prefixCls ? `${prefixCls}-message` : 'arco-message';
-
+    const prefixClsMessage = `${_prefixCls || prefixCls || 'arco'}-message`;
     const classNames = cs(`${prefixClsMessage}-wrapper`, `${prefixClsMessage}-wrapper-${position}`);
-
     return (
       <div className={classNames}>
         <TransitionGroup component={null}>
@@ -164,7 +165,7 @@ class Message extends BaseNotification {
                 iconPrefix={prefixCls}
                 onClose={this.remove}
                 noticeType="message"
-                rtl={rtl}
+                rtl={!isUndefined(_rtl) ? _rtl : rtl}
               />
             </CSSTransition>
           ))}
@@ -177,10 +178,13 @@ class Message extends BaseNotification {
 messageTypes.forEach((type) => {
   Message[type] = (noticeProps: MessageProps | string) => {
     const props = typeof noticeProps === 'string' ? { content: noticeProps } : noticeProps;
-    return addInstance({
-      ...props,
-      type,
-    });
+    return addInstance(
+      {
+        ...props,
+        type,
+      },
+      instanceRender
+    );
   };
 });
 

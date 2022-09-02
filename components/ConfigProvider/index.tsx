@@ -2,8 +2,8 @@ import React, { useEffect, createContext } from 'react';
 import defaultLocale from '../locale/default';
 import { isObject } from '../_util/is';
 import { lighten } from './util';
-import Message from '../Message';
-import Notification from '../Notification';
+// import Message from '../Message';
+// import Notification from '../Notification';
 import Empty from '../Empty';
 import { setConfigProviderProps } from '../Modal/config';
 import { IconContext } from '../../icon/react-icon/context';
@@ -94,8 +94,8 @@ function ConfigProvider(baseProps: ConfigProviderProps) {
   }, [theme]);
 
   useEffect(() => {
-    Message.config({ prefixCls, rtl });
-    Notification.config({ prefixCls, rtl });
+    // Message.config({ prefixCls, rtl });
+    // Notification.config({ prefixCls, rtl });
   }, [prefixCls, rtl]);
 
   function getPrefixCls(componentName: string, customPrefix?: string) {
