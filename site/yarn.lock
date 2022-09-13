@@ -350,10 +350,10 @@
   dependencies:
     classnames "^2.2.6"
 
-"@arco-materials/site-navbar-new@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/@arco-materials/site-navbar-new/-/site-navbar-new-0.1.2.tgz#595bfaaac0859df755b79067803a1e90a9e1a539"
-  integrity sha512-6jym9ce0+ci8ZcEE1ptNmekJdh3HE89f5MqX8LhS8A3M6Kqacgg0TEAVyfaExyaJ89xiHJ5Rctpdz6udJrPQQg==
+"@arco-materials/site-navbar-new@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.npmjs.org/@arco-materials/site-navbar-new/-/site-navbar-new-0.1.6.tgz#ce71c5051ef3929a026c165316e21fe3fa841dfc"
+  integrity sha512-i5BuoyMc7BQjFLXnluz6wT7UB3HRZA5ao0V6k3ZrV1NtRqcdFznwcTSq5HYhXZaqrRQF71BWW8b2NW1xh3MKoQ==
   dependencies:
     animejs "^3.2.1"
     axios "^0.27.2"
