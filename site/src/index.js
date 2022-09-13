@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from '@arco-materials/site-navbar';
+import Navbar from '@arco-materials/site-navbar-new';
 import { ConfigProvider } from '@arco-design/web-react';
 import zhCN from '@arco-design/web-react/es/locale/zh-CN';
 import App from './App';
@@ -14,7 +14,7 @@ import './style/index.less';
 import { isProduction } from './utils/env';
 import { registerServiceWorker } from './serviceWorkerRegistration';
 
-const requestDomain = isProduction ? `//${location.hostname}/` : '//localhost:3000';
+const requestDomain = isProduction ? `//${location.hostname}` : '//localhost:3000';
 
 function Index() {
   const arcoDirection = localStorage.getItem('arco-direction');
@@ -44,11 +44,12 @@ function Index() {
       rootElement.setAttribute('class', '');
     }
   }, [rtl]);
-
   return (
     <BrowserRouter>
       <Navbar.NavbarThemeProvider>
-        <GlobalContext.Provider value={{ lang: 'zh-CN', locale, user, rtl, toggleRtl: setRtl }}>
+        <GlobalContext.Provider
+          value={{ lang: 'zh-CN', locale, user, setUser, rtl, toggleRtl: setRtl }}
+        >
           <ScrollToTop />
           <ConfigProvider locale={zhCN} rtl={rtl}>
             <GlobalNoticeContext.Provider

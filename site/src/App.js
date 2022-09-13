@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import Navbar from '@arco-materials/site-navbar';
+import Navbar from '@arco-materials/site-navbar-new';
 import {
   PageDurationTracker,
   teaLog,
@@ -18,7 +18,7 @@ import UserNavbarBorderStyle from './hooks/useNavbarBorderStyle';
 import { EventMap } from './pages/home/utils/eventMap';
 
 export default function App() {
-  const { lang, user, rtl, toggleRtl } = useContext(GlobalContext);
+  const { lang, user, rtl, toggleRtl, setUser } = useContext(GlobalContext);
   const { setNoticeHeight } = useContext(GlobalNoticeContext);
   const history = useHistory();
   const isHome = history.location.pathname === '/';
@@ -92,6 +92,7 @@ export default function App() {
         onChangeRtl={(value) => toggleRtl(value === 'rtl')}
         rtl={rtl}
         hideRtl={false}
+        userSetting={setUser}
         {...navbarProps}
       />
       <Navbar.GlobalNotice onHeightChange={setNoticeHeight} lang={lang} />

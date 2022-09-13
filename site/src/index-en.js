@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from '@arco-materials/site-navbar';
+import Navbar from '@arco-materials/site-navbar-new';
 import { ConfigProvider } from '@arco-design/web-react';
 import enUS from '@arco-design/web-react/es/locale/en-US';
 import App from './App';
@@ -49,7 +49,9 @@ function Index() {
   return (
     <BrowserRouter>
       <Navbar.NavbarThemeProvider>
-        <GlobalContext.Provider value={{ lang: 'en-US', locale, user, rtl, toggleRtl: setRtl }}>
+        <GlobalContext.Provider
+          value={{ lang: 'en-US', locale, user, setUser, rtl, toggleRtl: setRtl }}
+        >
           <ScrollToTop />
           <ConfigProvider locale={enUS} rtl={rtl}>
             <GlobalNoticeContext.Provider
