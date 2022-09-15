@@ -28,12 +28,10 @@ const isReact18 = Number(CopyReactDOM.version?.split('.')[0]) > 17;
 let createRoot: CreateRootFnType;
 try {
   // https://github.com/facebook/react/blob/17806594cc28284fe195f918e8d77de3516848ec/packages/react-dom/npm/client.js#L10
-  CopyReactDOM[__SECRET_INTERNALS__] = {
-    ...CopyReactDOM[__SECRET_INTERNALS__],
-    usingClientEntryPoint: true,
-  };
+  CopyReactDOM[__SECRET_INTERNALS__].usingClientEntryPoint = true;
   // Avoid console warning
   createRoot = CopyReactDOM.createRoot;
+  CopyReactDOM[__SECRET_INTERNALS__].usingClientEntryPoint = false;
 } catch (_) {
   //
 }
